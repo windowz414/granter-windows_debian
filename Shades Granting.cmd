@@ -19,6 +19,14 @@ echo Please connect your device using a cable and in unlocked state.
 echo Also please allow the permission when requested.
 adb\adb.exe wait-for-device
 cls
+FOR /F "tokens=* USEBACKQ" %%F IN (`adb\adb.exe shell getprop ro.product.manufacturer`) DO (
+
+SET oppocheck=%%F
+
+)
+
+if %oppocheck%=="Oppo" echo OPPO device is found. Please make sure to disable permission monitor in Developer Options and press any key to begin with granting process.
+pause
 echo Now granting the shades on your device.
 adb\adb.exe shell pm grant com.treydev.mns android.permission.WRITE_SECURE_SETTINGS > NUL
 adb\adb.exe shell pm grant com.treydev.pns android.permission.WRITE_SECURE_SETTINGS > NUL
